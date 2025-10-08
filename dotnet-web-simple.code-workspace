@@ -1,0 +1,33 @@
+{
+	"folders": [
+		{
+			"name": "dotnet-web-simple",
+			"path": "/projects/dotnet-web-simple"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"redhat.vscode-yaml",
+			"mhutchie.git-graph",
+			"eamodio.gitlens",
+			"streetsidesoftware.code-spell-checker",
+			"johnpapa.winteriscoming",
+			"cnshenj.vscode-task-manager",
+            "ms-dotnettools.vscode-dotnet-runtime",
+            "muhammad-sammy.csharp"
+		]
+	},
+	"settings": {
+		"workbench.colorTheme": "Default Dark Modern",
+		"workbench.preferredDarkColorTheme": "Default Dark Modern",
+		"workbench.preferredLightColorTheme": "Default Dark Modern",
+		"editor.wordWrap": "on",
+		"files.autoSave": "afterDelay",
+		"dotnetAcquisitionExtension.existingDotnetPath": [
+        {
+            "extensionId": "muhammad-sammy.csharp",
+            "path": "/usr/bin/dotnet"
+        }
+    ]
+	}
+}
