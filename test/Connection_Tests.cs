@@ -6,7 +6,7 @@ namespace web.test;
 public class Connection_Tests
 {
     /* In the mssql-container terminal, run these commands to set up the test DB and table:
-    $ /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P P@ssword1
+    $ /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P P@ssword1 -q "select @@Version"
     > USE TABLE TESTDB;
     > CREATE TABLE dbo.Inventory (id INT,name NVARCHAR (50),quantity INT,PRIMARY KEY (id));
     > INSERT INTO dbo.Inventory VALUES (1, 'banana', 150); INSERT INTO dbo.Inventory VALUES (2, 'orange', 154);
@@ -16,10 +16,11 @@ public class Connection_Tests
     > EXIT
     */
   
+     [Fact(DisplayName = "Test Database Connection")]
     public void ConnectToMssqlAndSelectAll()
     {
         // Connection string for local SQL Server
-        var connectionString = "Server=localhost,1433;Database=test;User Id=sa;Password=P@ssword1;TrustServerCertificate=True;";
+        var connectionString = "Server=localhost,1433;Database=TESTDB;User Id=sa;Password=P@ssword1;TrustServerCertificate=True;";
         using var connection = new SqlConnection(connectionString);
         connection.Open();
 

@@ -14,7 +14,9 @@
 			"johnpapa.winteriscoming",
 			"cnshenj.vscode-task-manager",
             "ms-dotnettools.vscode-dotnet-runtime",
-            "muhammad-sammy.csharp"
+            "muhammad-sammy.csharp",
+			"google.geminicodeassist",
+			"google.gemini-cli-vscode-ide-companion"
 		]
 	},
 	"settings": {
