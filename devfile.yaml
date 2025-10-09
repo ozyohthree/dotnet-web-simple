@@ -1,6 +1,6 @@
 schemaVersion: 2.2.2
 metadata:
-  name: dotnet
+  name: dotnet-web-simple
 components:
   - name: tools
     container:
