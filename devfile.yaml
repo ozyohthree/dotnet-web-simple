@@ -83,3 +83,11 @@ commands:
       commandLine: "dotnet run"
       group:
         kind: run
+  - id: 4-test
+    exec:
+      label: 4.Test
+      component: tools
+      workingDir: /projects/dotnet-web-simple
+      commandLine: "dotnet test"
+      group:
+        kind: run        
