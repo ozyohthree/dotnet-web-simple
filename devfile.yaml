@@ -35,6 +35,8 @@ components:
           value: "Developer"
         - name: ACCEPT_EULA
           value: "Y"
+        - name: MSSQL_SA_ENABLED
+          value: "Y"  
         - name: MSSQL_SA_PASSWORD
           value: "P@ssword1"
       volumeMounts:
