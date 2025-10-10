@@ -43,9 +43,25 @@ public class Connection_Tests
         using var createTableCmd = new SqlCommand("IF OBJECT_ID('dbo.Inventory', 'U') IS NULL CREATE TABLE dbo.Inventory (id INT, name NVARCHAR(50), quantity INT);", connection);
         await createTableCmd.ExecuteNonQueryAsync();
 
+        // Clear the table before inserting new data
+        using var clearTableCmd = new SqlCommand("DELETE FROM dbo.Inventory;", connection);
+        await clearTableCmd.ExecuteNonQueryAsync();
+
         // Insert some data
         using var insertCmd = new SqlCommand("INSERT INTO dbo.Inventory VALUES (1, 'banana', 150); INSERT INTO dbo.Inventory VALUES (2, 'orange', 154);", connection);
         await insertCmd.ExecuteNonQueryAsync();
+
+        // Print data from the table        
+        Console.WriteLine("Data in Inventory table:");
+        using (var readCmd = new SqlCommand("SELECT id, name, quantity FROM dbo.Inventory", connection))
+        using (var dataReader = await readCmd.ExecuteReaderAsync())
+        {
+            while (dataReader.Read())
+            {
+                Console.WriteLine($"Id: {dataReader.GetInt32(0)}, Name: {dataReader.GetString(1)}, Quantity: {dataReader.GetInt32(2)}");
+            }
+        }
+        
 
         using var command = new SqlCommand("SELECT * FROM dbo.Inventory", connection);
         using var reader = await command.ExecuteReaderAsync();
