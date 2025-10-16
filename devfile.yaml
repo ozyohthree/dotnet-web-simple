@@ -6,7 +6,7 @@ components:
     container:
       #  quay.io/devspaces/dotnet-90:9.0-fedora-20250415-095811
       # quay.io/devspaces/dotnet-90@sha256:5cb201f58ebf20d76b7b99e013da46aa6cfe594c5763ab873bcc6436965d7859
-      image: quay.io/ohthree/dotnet:8-fedora41
+      image: registry.access.redhat.com/ubi8/dotnet-80:latest
       memoryLimit: '2Gi'
       memoryRequest: '1Gi'
       cpuLimit: '1'
