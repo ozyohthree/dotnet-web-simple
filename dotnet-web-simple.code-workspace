@@ -20,12 +20,6 @@
 		"workbench.preferredDarkColorTheme": "Default Dark Modern",
 		"workbench.preferredLightColorTheme": "Default Dark Modern",
 		"editor.wordWrap": "on",
-		"files.autoSave": "afterDelay",
-		"dotnetAcquisitionExtension.existingDotnetPath": [
-        {
-            "extensionId": "muhammad-sammy.csharp",
-            "path": "/usr/bin/dotnet"
-        }
-    ]
+		"files.autoSave": "afterDelay"
 	}
 }
