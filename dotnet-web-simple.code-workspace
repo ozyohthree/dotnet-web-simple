@@ -8,10 +8,6 @@
 	"extensions": {
 		"recommendations": [
 			"redhat.vscode-yaml",
-			"mhutchie.git-graph",
-			"eamodio.gitlens",
-			"streetsidesoftware.code-spell-checker",
-			"johnpapa.winteriscoming",
 			"cnshenj.vscode-task-manager",
             "ms-dotnettools.vscode-dotnet-runtime",
             "muhammad-sammy.csharp",
