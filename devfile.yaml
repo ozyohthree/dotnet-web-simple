@@ -61,6 +61,91 @@ components:
   - name: nuget
     volume:
       size: 1G
+  - name: zk-data
+    volume:
+      size: 1Gi
+  - name: zookeeper
+    container:
+      image: confluentinc/cp-zookeeper:7.5.0
+      memoryLimit: 640Mi
+      env:
+        - name: ZOOKEEPER_CLIENT_PORT
+          value: "2181"
+        - name: ZOOKEEPER_TICK_TIME
+          value: "2000"
+        - name: KAFKA_HEAP_OPTS
+          value: "-Xms256M -Xmx256M"
+      endpoints:
+        - name: zk-2181
+          targetPort: 2181
+          exposure: internal
+          protocol: tcp
+      volumeMounts:
+        - name: zk-data
+          path: /var/lib/zookeeper/data
+  - name: kafka
+    container:
+      image: confluentinc/cp-server:7.5.0
+      memoryLimit: 2.5Gi
+      env:
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: "localhost:2181"
+        - name: KAFKA_ADVERTISED_LISTENERS
+          value: "PLAINTEXT://localhost:9092"
+        - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+          value: "1"
+        - name: KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR
+          value: "1"
+        - name: KAFKA_CONFLUENT_SUPPORT_METRICS_ENABLE
+          value: "false"
+        - name: KFAKA_CONFLUENT_BALANCER_ENABLE
+          value: "false"
+        - name: KAFKA_HEAP_OPTS
+          value: "-Xms1G -Xmx1G"
+  - name: schema-registry
+    container:
+      image: confluentinc/cp-schema-registry:7.5.0
+      env:
+        - name: SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS
+          value: "localhost:9092"
+        - name: SCHEMA_REGISTRY_HOST_NAME
+          value: "locahost"
+        - name: SCHEMA_REGISTRY_LISTENERS
+          value: "http://0.0.0.0:8081"
+        - name: KAFKA_HEAP_OPTS
+          value: "-Xms256M -Xmx256M"
+      memoryLimit: 512Mi
+      endpoints:
+        - name: schema-registry
+          targetPort: 8081
+          exposure: public
+          protocol: https
+  - name: control-center
+    container:
+      image: confluentinc/cp-enterprise-control-center:7.5.0
+      memoryLimit: 2.5Gi
+      env:
+        - name: CONTROL_CENTER_BOOTSTRAP_SERVERS
+          value: "localhost:9092"
+        - name: CONTROL_CENTER_ZOOKEEPER_CONNECT
+          value: "localhost:2181"
+        - name: CONTROL_CENTER_SCHEMA_REGISTRY_URL
+          value: "http://localhost:8081"
+        - name: CONTROL_CENTER_REPLICATION_FACTOR
+          value: "1"
+        - name: CONTROL_CENTER_INTERNAL_TOPICS_REPLICATION
+          value: "1"
+        - name: CONTROL_CENTER_COMMAND_TOPIC_REPLICATION
+          value: "1"
+        - name: CONTROL_CENTER_METRICS_TOPIC_REPLICATION
+          value: "1"
+        - name: KAFKA_HEAP_OPTS
+          value: "-Xms1G -Xmx1G"
+      endpoints:
+        - name: control-center
+          targetPort: 9021
+          exposure: public
+          protocol: https
 commands:
   - id: 1-update-dependencies
     exec:
